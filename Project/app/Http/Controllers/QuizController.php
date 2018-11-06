@@ -56,4 +56,9 @@ class QuizController extends Controller
     	}
     	return redirect()->route('AddQuiz');
     }
+    public function GetQuizzes()
+    {
+        $quizzes = Quiz::paginate(1);
+        return view('raven_test', ['quizzes' => $quizzes]);
+    }
 }

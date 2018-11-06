@@ -26,7 +26,7 @@
 								<div class="row">
 									<div class="col-lg-9">
 										<div class="tabs d-flex flex-row align-items-center justify-content-start">
-											<div class="tab active">description</div>
+											<div class="tab active">START</div>
 											<div class="tab">curriculum</div>
 											<div class="tab">reviews</div>
 											<div class="tab">members</div>
@@ -38,89 +38,45 @@
 
 						<!-- Description -->
 						<div class="tab_panel description active">
-							<div class="panel_title">Time</div>
-							<div class="panel_text">
-								<p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum. Sed nec elit </p>
-							</div>
-							
-							<!-- Instructors -->
-							<div class="instructors">
-								<div class="panel_title">All instructors</div>
-								<div class="row instructors_row">
-
-									<!-- Instructor -->
-									<div class="col-lg-4 col-md-6">
-										<div class="instructor d-flex flex-row align-items-center justify-content-start">
-											<div class="instructor_image"><div><img src="images/instructor_4.jpg" alt=""></div></div>
-											<div class="instructor_content">
-												<div class="instructor_name"><a href="instructors.html">Sarah Parker</a></div>
-												<div class="instructor_title">Teacher</div>
-											</div>
-										</div>
-									</div>
-
-									<!-- Instructor -->
-									<div class="col-lg-4 col-md-6">
-										<div class="instructor d-flex flex-row align-items-center justify-content-start">
-											<div class="instructor_image"><div><img src="images/instructor_5.jpg" alt=""></div></div>
-											<div class="instructor_content">
-												<div class="instructor_name"><a href="instructors.html">Sarah Parker</a></div>
-												<div class="instructor_title">Teacher</div>
-											</div>
-										</div>
-									</div>
-
-									<!-- Instructor -->
-									<div class="col-lg-4 col-md-6">
-										<div class="instructor d-flex flex-row align-items-center justify-content-start">
-											<div class="instructor_image"><div><img src="images/instructor_9.jpg" alt=""></div></div>
-											<div class="instructor_content">
-												<div class="instructor_name"><a href="instructors.html">Sarah Parker</a></div>
-												<div class="instructor_title">Teacher</div>
-											</div>
-										</div>
-									</div>
-
-								</div>
-							</div>
-
 							<!-- FAQs -->
 							<div class="faqs">
-								<div class="panel_title">FAQs</div>
 								<div class="accordions">
-												
+								@foreach($quizzes as $quiz)				
 									<div class="elements_accordions">
 
 										<div class="accordion_container">
-											<div class="accordion d-flex flex-row align-items-center active"><div>Can I just enroll in a single course? I'm not interested in the entire Specializat</div></div>
+											<div class="accordion d-flex flex-row align-items-center active">
+												<div>Quiz {{$quiz->raven_code}}</div>
+											</div>
 											<div class="accordion_panel">
-												<p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum. Sed nec elit vehicula, aliquam neque euismod, porttitor ex. Nam consequat iaculis maximus.</p>
+
+												<div class="row">
+													<div class="col-md-3">
+													</div>
+													<div class="col-md-6">
+														<img src="{{asset($quiz->image_content)}}" class="img-fluid">
+													</div>
+													<div class="col-md-3">
+													</div>
+												</div>
+												<div class="row">
+													@foreach($quiz->answers as $answer)
+													<div class="col-md-4">
+														<div>
+															<input type="radio" name="answer" 
+																value="{{$answer->number}}">
+														</div>
+														<br>
+														<img src="{{asset($answer->image_content)}}" class="img-fluid">
+														
+													</div>
+													@endforeach
+												</div>
 											</div>
 										</div>
-
-										<div class="accordion_container">
-											<div class="accordion d-flex flex-row align-items-center"><div>What is the refund policy?</div></div>
-											<div class="accordion_panel">
-												<p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum. Sed nec elit vehicula, aliquam neque euismod, porttitor ex. Nam consequat iaculis maximus.</p>
-											</div>
-										</div>
-
-										<div class="accordion_container">
-											<div class="accordion d-flex flex-row align-items-center"><div>What background knowledge is necessary</div></div>
-											<div class="accordion_panel">
-												<p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum. Sed nec elit vehicula, aliquam neque euismod, porttitor ex. Nam consequat iaculis maximus.</p>
-											</div>
-										</div>
-
-										<div class="accordion_container">
-											<div class="accordion d-flex flex-row align-items-center"><div>Do i need to take the courses in a specific ord</div></div>
-											<div class="accordion_panel">
-												<p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum. Sed nec elit vehicula, aliquam neque euismod, porttitor ex. Nam consequat iaculis maximus.</p>
-											</div>
-										</div>
-
 									</div>
-
+								@endforeach
+								{{ $quizzes->links() }}
 								</div>
 							</div>
 						</div>

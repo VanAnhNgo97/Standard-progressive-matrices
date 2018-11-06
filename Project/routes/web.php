@@ -17,9 +17,7 @@ Route::get('/', function () {
 Route::get('/index', function(){
 	return view('index');
 });
-Route::get('/raven', function(){
-	return view('raven_test');
-});
+Route::get('/raven','QuizController@GetQuizzes');
 Route::get('admin/quiz/add', function(){
 	return view('admin/quiz_add');
 })->name('AddQuiz');
