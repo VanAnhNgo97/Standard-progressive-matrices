@@ -20,3 +20,7 @@ Route::get('/index', function(){
 Route::get('/raven', function(){
 	return view('raven_test');
 });
+Route::get('admin/quiz/add', function(){
+	return view('admin/quiz_add');
+})->name('AddQuiz');
+Route::post('admin/quiz/add','QuizController@Create');

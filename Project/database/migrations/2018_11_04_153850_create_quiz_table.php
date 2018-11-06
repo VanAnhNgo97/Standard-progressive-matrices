@@ -17,6 +17,7 @@ class CreateQuizTable extends Migration
             $table->increments('id');
             $table->string('raven_code')->unique();
             $table->string('image_content');
+            $table->string('category');
             $table->timestamps();
         });
     }
