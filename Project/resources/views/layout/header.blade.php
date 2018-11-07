@@ -60,8 +60,8 @@
 						<nav class="main_nav_contaner">
 							<ul class="main_nav">
 								<li class="active"><a href="index.html">Home</a></li>
-								<li><a href="courses.html">Courses</a></li>
-								<li><a href="instructors.html">Instructors</a></li>
+								<li><a href="courses.html">IQ Tests</a></li>
+								<li><a href="instructors.html">IQ Articles</a></li>
 								<li><a href="#">Events</a></li>
 								<li><a href="blog.html">Blog</a></li>
 								<li><a href="contact.html">Contact</a></li>

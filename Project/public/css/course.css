@@ -1329,8 +1329,8 @@ section
 	padding-right: 8px;
 	padding-left: 32px;
 	padding-top: 11px;
-	max-height: 0px;
-	overflow: hidden;
+	/*max-height: 0px;
+	overflow: hidden;*/
 	-webkit-transition: all 500ms ease;
 	-moz-transition: all 500ms ease;
 	-ms-transition: all 500ms ease;

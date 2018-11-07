@@ -39,46 +39,11 @@
 						<!-- Description -->
 						<div class="tab_panel description active">
 							<!-- FAQs -->
-							<div class="faqs">
-								<div class="accordions">
-								@foreach($quizzes as $quiz)				
-									<div class="elements_accordions">
-
-										<div class="accordion_container">
-											<div class="accordion d-flex flex-row align-items-center active">
-												<div>Quiz {{$quiz->raven_code}}</div>
-											</div>
-											<div class="accordion_panel">
-
-												<div class="row">
-													<div class="col-md-3">
-													</div>
-													<div class="col-md-6">
-														<img src="{{asset($quiz->image_content)}}" class="img-fluid">
-													</div>
-													<div class="col-md-3">
-													</div>
-												</div>
-												<div class="row">
-													@foreach($quiz->answers as $answer)
-													<div class="col-md-4">
-														<div>
-															<input type="radio" name="answer" 
-																value="{{$answer->number}}">
-														</div>
-														<br>
-														<img src="{{asset($answer->image_content)}}" class="img-fluid">
-														
-													</div>
-													@endforeach
-												</div>
-											</div>
-										</div>
-									</div>
-								@endforeach
-								{{ $quizzes->links() }}
-								</div>
+							@if(count($quizzes) > 0)
+							<div class="faqs" id="quiz_container">
+								@include('quiz_container')
 							</div>
+							@endif
 						</div>
 
 						<!-- Curriculum -->
@@ -417,4 +382,5 @@
 <script src="{{asset('plugins/parallax-js-master/parallax.min.js')}}"></script>
 <script src="{{asset('plugins/progressbar/progressbar.min.js')}}"></script>
 <script src="{{asset('js/course.js')}}"></script>
+<script src="{{asset('js/raven_test.js')}}"></script>
 @endsection

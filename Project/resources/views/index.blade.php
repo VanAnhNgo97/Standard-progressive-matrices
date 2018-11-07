@@ -9,7 +9,7 @@
 				<div class="row">
 					<div class="col text-center">
 						<h1 class="home_title">Test IQ Easily</h1>
-						<div class="home_button trans_200"><a href="#">get started</a></div>
+						<div class="home_button trans_200"><a href="{{url('/raven')}}">get started</a></div>
 					</div>
 				</div>
 			</div>
@@ -117,7 +117,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<h2 class="section_title text-center">Popular Online Courses</h2>
+					<h2 class="section_title text-center">Popular Online Tests</h2>
 				</div>
 			</div>
 			<div class="row courses_row">
