@@ -14,6 +14,7 @@ $(document).ready(function(){
         	quiz = $("input[type='radio']:checked").attr('name');
         	index = parseInt(quiz);
         	quizList[index] = answer;
+            submitQuiz(quiz, answer);
         }else{
         	console.log("nochecked");
         }
@@ -22,7 +23,7 @@ $(document).ready(function(){
       	console.log($('#quiz_load a').attr('rel'));
       	
       	getQuiz(url);
-        submitQuiz(quiz, answer);
+        
         window.history.pushState("", "", url);
     });
 

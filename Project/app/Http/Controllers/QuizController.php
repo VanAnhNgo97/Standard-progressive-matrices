@@ -78,6 +78,7 @@ class QuizController extends Controller
         if($quiz->correctAnswer->answer_id == $answer_id){
             $this->score++;
         }
+        
         return json_encode($this->score);
     }
 }
