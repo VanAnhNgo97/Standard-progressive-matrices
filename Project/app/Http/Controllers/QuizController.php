@@ -10,6 +10,7 @@ use App\Model\CorrectAnswer;
 class QuizController extends Controller
 {
     //
+    protected $score = 0;
     public function Create(Request $request)
     {
         $quiz = new Quiz;
@@ -68,6 +69,15 @@ class QuizController extends Controller
     }
     public function SubmitQuiz(Request $request)
     {
+
+        $quiz_id = (int)$request->quiz_id;
+        $answer_id = (int)$request->answer_id;
+
+        $quiz = Quiz::find($quiz_id);
         return json_encode("ok");
+        if($quiz->correctAnswer->answer_id == $answer_id){
+            $this->score++;
+        }
+        return json_encode($this->score);
     }
 }

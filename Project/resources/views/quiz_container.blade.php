@@ -5,6 +5,12 @@
 			<div class="accordion_container">
 				<div class="accordion d-flex flex-row align-items-center active">
 					<div>Quiz {{$quiz->raven_code}}</div>
+				{{--	<form action="/raven/submit" method="post">
+						@csrf
+						<input type="text" name="quiz_id">
+						<input type="text" name="answer_id">
+						<input type="submit" name="Submit">
+					</form> --}}
 				</div>
 				<div class="accordion_panel">
 					<div class="row">

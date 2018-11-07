@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	var reqData1 = new FormData();
+	var quizList = [];
+	var index = 0;
 	var preSelectedAnswer="", preQuiz="", nextSeletectdAnswer="", nextQuiz="";
 	$('body').on('click', '.pagination a', function(e) {
         e.preventDefault();
@@ -10,48 +12,32 @@ $(document).ready(function(){
         	console.log("checked");
         	answer = $("input[type='radio']:checked").val();
         	quiz = $("input[type='radio']:checked").attr('name');
+        	index = parseInt(quiz);
+        	quizList[index] = answer;
         }else{
         	console.log("nochecked");
         }
-        
-       // reqData1.append("quiz", answer);
         console.log(quiz + "--" + answer);
       //  var option = {'content' : reqData1};
-      	if($('#quiz_load a').attr('rel') == 'prev'){
-      		nextSeletectdAnswer = answer;
-      		nextQuiz = quiz;
-      		console.log("prev - " + preQuiz + "--" + preSelectedAnswer);
-      		getQuiz(url, preQuiz,preSelectedAnswer);
-      	}else{
-
-      		preSelectedAnswer = answer;
-      		preQuiz = quiz;
-      		console.log("next --" + nextQuiz + "--" + nextSeletectdAnswer);
-      		getQuiz(url, nextQuiz, nextSeletectdAnswer);
-      	}
+      	console.log($('#quiz_load a').attr('rel'));
+      	
+      	getQuiz(url);
         submitQuiz(quiz, answer);
         window.history.pushState("", "", url);
     });
 
-    function getQuiz(url, quiz, selected_answer) {
+    function getQuiz(url) {
         $.ajax({
             url : url  
         }).done(function (data) {
 		//	console.log(data);        	
             $('#quiz_container').html(data);
-            if(quiz != "" && selected_answer != ""){
-            	console.log("ko null kia");
-            	var radioBtn = document.getElementById(selected_answer);
+            var quiz = parseInt($("input:radio").attr('name'));
+            if(quizList[quiz] != undefined){
+            	var radioBtn = document.getElementById(quizList[quiz]);
             	radioBtn.checked = true;
-            	//console.log($("input:radio[name=10]"));
-        /*    	var radio = "\"input:radio[name=\'" + quiz + "\']\"";
-            	console.log(radio);
-            	var radioBtn = $("input:radio");
-            //	var radioBtn = $(radio);
-            	console.log(radioBtn);
-            	radioBtn.filter([value='35']).prop('checked', true);
-            	radioBtn.filter("\'[value=\'" + selected_answer +"\']\'").prop('checked', true);*/
             }
+          
            
         }).fail(function () {
             alert('Quizzes could not be loaded.');
