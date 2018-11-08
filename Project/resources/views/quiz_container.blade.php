@@ -1,4 +1,7 @@
 <div class="accordions" id="quiz_load">
+	@php
+		$i = 0;
+	@endphp
 	@foreach($quizzes as $quiz)				
 		<div class="elements_accordions">
 
@@ -39,6 +42,9 @@
 				</div>
 			</div>
 		</div>
+	@php
+		$i++;
+	@endphp
 	@endforeach
 	{{ $quizzes->links() }}
 </div>
