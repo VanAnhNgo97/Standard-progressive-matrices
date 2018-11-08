@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	var reqData1 = new FormData();
 	var quizList = [];
-	var index = 0;
+	
 	var preSelectedAnswer="", preQuiz="", nextSeletectdAnswer="", nextQuiz="";
 	$('body').on('click', '.pagination a', function(e) {
         e.preventDefault();
@@ -12,18 +12,20 @@ $(document).ready(function(){
         	console.log("checked");
         	answer = $("input[type='radio']:checked").val();
         	quiz = $("input[type='radio']:checked").attr('name');
-        	index = parseInt(quiz);
-        	quizList[index] = answer;
-            submitQuiz(quiz, answer);
-        }else{
-        	console.log("nochecked");
+        //	index = parseInt($("input[type='radio']:checked").attr('order'));
+           var item = {
+                quiz: quiz,
+                answer: answer
+            };
+            var index = isSelectedQuiz(quizList, quiz);
+            if(index != -1){
+                quizList[index] = item;
+            }else{
+                quizList.push(item);
+            }
+         //   submitQuiz(quiz, answer);
         }
-        console.log(quiz + "--" + answer);
-      //  var option = {'content' : reqData1};
-      	console.log($('#quiz_load a').attr('rel'));
-      	
       	getQuiz(url);
-        
         window.history.pushState("", "", url);
     });
 
@@ -31,11 +33,11 @@ $(document).ready(function(){
         $.ajax({
             url : url  
         }).done(function (data) {
-		//	console.log(data);        	
             $('#quiz_container').html(data);
-            var quiz = parseInt($("input:radio").attr('name'));
-            if(quizList[quiz] != undefined){
-            	var radioBtn = document.getElementById(quizList[quiz]);
+            var currentQuiz = parseInt($("input:radio").attr('name'));
+            var index = isSelectedQuiz(quizList, currentQuiz);
+            if(index != -1){
+            	var radioBtn = document.getElementById(quizList[index].answer);
             	radioBtn.checked = true;
             }
           
@@ -71,5 +73,12 @@ $(document).ready(function(){
             
         });
     }
-	
+	function isSelectedQuiz(arr, quiz){
+        var i = -1;
+        for(i=0; i < arr.length; i++){
+            if(quiz == arr[i].quiz)
+                return i;
+        }
+        return -1;
+    }
 });
