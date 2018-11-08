@@ -45,7 +45,9 @@
 							@if(count($quizzes) > 0)
 							<div class="faqs" id="quiz_container">
 								@include('quiz_container')
+
 							</div>
+
 							@endif
 						</div>
 					</div>
@@ -99,6 +101,11 @@
 											<li><div id="minute" class="timer_num">00</div><div class="timer_ss">minutes</div></li>
 											<li><div id="second" class="timer_num">00</div><div class="timer_ss">seconds</div></li>
 										</ul>
+									</div>
+									<div class="text-center login_btn trans_200">
+										<a  href="javascript:void(0)" 
+											id="finish">Finish
+										</a>
 									</div>
 									<!-- Like Item -->
 							{{--		<div class="like_item d-flex flex-row align-items-end justify-content-start">
