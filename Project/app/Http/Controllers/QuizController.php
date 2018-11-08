@@ -59,7 +59,7 @@ class QuizController extends Controller
     }
     public function GetQuizzes(Request $request)
     {
-        $quizzes = Quiz::simplePaginate(1);
+        $quizzes = Quiz::orderBy('raven_code', 'asc')->simplePaginate(1);
         if ($request->ajax()) {
             //render partial 
             return view('quiz_container', ['quizzes' => $quizzes])->render();  
@@ -69,16 +69,21 @@ class QuizController extends Controller
     }
     public function SubmitQuiz(Request $request)
     {
+        //decode
+        $minute = (int)$request->minute;
+        $second = (int)$request->second;
+        $userAnswers = $request->answers; //is_array = true
+        $score = 0;
 
-        $quiz_id = (int)$request->quiz_id;
-        $answer_id = (int)$request->answer_id;
-
-        $quiz = Quiz::find($quiz_id);
-        return json_encode("ok");
-        if($quiz->correctAnswer->answer_id == $answer_id){
-            $this->score++;
+        foreach ($userAnswers as $userAnswer) {
+            $quiz_id = (int)$userAnswer['quiz'];
+            $answer_id = (int)$userAnswer['answer'];
+            $quiz = Quiz::find($quiz_id);
+            if($quiz->correctAnswer->answer_id == $answer_id){
+                $score++;
+            }
         }
+        return $score;
         
-        return json_encode($this->score);
     }
 }

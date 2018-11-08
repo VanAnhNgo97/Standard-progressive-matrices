@@ -1,32 +1,19 @@
 $(document).ready(function(){
-	var reqData1 = new FormData();
+	/*var reqData1 = new FormData();*/
 	var quizList = [];
 	
-	var preSelectedAnswer="", preQuiz="", nextSeletectdAnswer="", nextQuiz="";
+	/*var preSelectedAnswer="", preQuiz="", nextSeletectdAnswer="", nextQuiz="";*/
 	$('body').on('click', '.pagination a', function(e) {
         e.preventDefault();
         $('#quiz_load a').css('color', '#dfecf6');
         var url = $(this).attr('href');
-        var answer = "", quiz="";
-        if($("input[type='radio']:checked").is(':checked')){
-        	console.log("checked");
-        	answer = $("input[type='radio']:checked").val();
-        	quiz = $("input[type='radio']:checked").attr('name');
-        //	index = parseInt($("input[type='radio']:checked").attr('order'));
-           var item = {
-                quiz: quiz,
-                answer: answer
-            };
-            var index = isSelectedQuiz(quizList, quiz);
-            if(index != -1){
-                quizList[index] = item;
-            }else{
-                quizList.push(item);
-            }
-         //   submitQuiz(quiz, answer);
-        }
+       // var answer = "", quiz="";
+        answerQuiz();
       	getQuiz(url);
         window.history.pushState("", "", url);
+    });
+    $("#finish").click(function(){
+        submitQuiz();
     });
 
     function getQuiz(url) {
@@ -46,13 +33,16 @@ $(document).ready(function(){
             alert('Quizzes could not be loaded.');
         });
     }
-    function submitQuiz(quiz, selected_answer){
+    function submitQuiz(){
     	console.log("submit");
-    	 var reqData = {
-    	 	 '_token': $('_token').val(),
-    		'quiz_id': quiz,
-    		'answer_id': selected_answer
+        answerQuiz();
+    	var reqData = {
+    	 	'_token': $('_token').val(),
+            'answers' : quizList,
+            'minute': $("#minute").text(),
+            'second': $("#second").text()
     	}
+        console.log(reqData);
     	$.ajaxSetup({
 			headers: {
 			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -61,8 +51,8 @@ $(document).ready(function(){
     	$.ajax({
             url : '/raven/submit',
             type: 'POST',
-            data: JSON.stringify(reqData),
-            dataType: 'JSON',
+            data: reqData,
+          //  dataType: 'JSON',
             success: function(data){
             	console.log(data);
             },
@@ -80,5 +70,23 @@ $(document).ready(function(){
                 return i;
         }
         return -1;
+    }
+    function answerQuiz(){
+        if($("input[type='radio']:checked").is(':checked')){
+            console.log("checked");
+            var answer = $("input[type='radio']:checked").val();
+            var quiz = $("input[type='radio']:checked").attr('name');
+           var item = {
+                quiz: quiz,
+                answer: answer
+            };
+            var index = isSelectedQuiz(quizList, quiz);
+            if(index != -1){
+                quizList[index] = item;
+            }else{
+                quizList.push(item);
+            }
+         //   submitQuiz(quiz, answer);
+        }
     }
 });
