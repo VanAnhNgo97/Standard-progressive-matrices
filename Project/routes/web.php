@@ -23,3 +23,4 @@ Route::get('admin/quiz/add', function(){
 })->name('AddQuiz');
 Route::post('admin/quiz/add','QuizController@Create');
 Route::post('/raven/submit','QuizController@SubmitQuiz');
+Route::get('test','QuizController@Test');

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Quiz;
 use App\Model\Answer;
 use App\Model\CorrectAnswer;
+use App\Model\ReferencesIQ;
 class QuizController extends Controller
 {
     //
@@ -17,40 +18,40 @@ class QuizController extends Controller
         $destination = '';
         $quiz->raven_code = $request->raven_code;
         $quiz->category = $request->category;
-        $nummberCorrectAnswer = (int)$request->correct_answer;
+        $nummber_correct_answer = (int)$request->correct_answer;
         $i = 1;
         echo(gettype($i));
         if($request->File('quiz_image')){
             $file = $request->quiz_image;
             $name = $file->getClientOriginalName();
-            $fileName = $quiz->raven_code .'_'. $name;
-            echo $fileName;
+            $file_name = $quiz->raven_code .'_'. $name;
+            echo $file_name;
             $destination = 'images/quiz/' . $quiz->category;
-            $file->move($destination, $fileName);
+            $file->move($destination, $file_name);
             $quiz->image_content = $destination .'/' . $fileName;
         }else{
             echo "noo";
         }
         $quiz->save();
         if($request->hasFile('answer_images')){
-            $answerFiles = $request->answer_images;
+            $answer_files = $request->answer_images;
             $i = 1;
-            foreach ($answerFiles as $answerFile) {
+            foreach ($answer_files as $answer_file) {
                 $answer = new Answer;
                 $answer->number = $i;
                 $name = $answerFile->getClientOriginalName();
-                $fileName = $quiz->raven_code . '_' . 'Answer' . $i . '_' . $name;
-                $answerFile->move($destination, $fileName);
+                $file_name = $quiz->raven_code . '_' . 'Answer' . $i . '_' . $name;
+                $answer_file->move($destination, $fileName);
                 $answer->image_content = $destination . '/' . $fileName;
                 $answer->quiz_id = $quiz->id;
                 $answer->save();
-                if($i == $nummberCorrectAnswer){
-                    $correctAnswer = new CorrectAnswer;
+                if($i == $nummber_correct_answer){
+                    $correct_answer = new CorrectAnswer;
                     echo "ok";
-                    $correctAnswer->quiz_id = $quiz->id;
+                    $correct_answer->quiz_id = $quiz->id;
                     echo "ok2";
-                    $correctAnswer->answer_id = $answer->id;
-                    $correctAnswer->save();
+                    $correct_answer->answer_id = $answer->id;
+                    $correct_answer->save();
                 }
                 $i++;
             }
@@ -69,21 +70,40 @@ class QuizController extends Controller
     }
     public function SubmitQuiz(Request $request)
     {
-        //decode
-        $minute = (int)$request->minute;
-        $second = (int)$request->second;
-        $userAnswers = $request->answers; //is_array = true
-        $score = 0;
+        $minute = 60 - (int)$request->minute;
+        $second = 60 - (int)$request->second;
+        $user_answers = $request->answers; //is_array = true
+        $raven_score = 0;
 
-        foreach ($userAnswers as $userAnswer) {
-            $quiz_id = (int)$userAnswer['quiz'];
-            $answer_id = (int)$userAnswer['answer'];
+        foreach ($user_answers as $user_answer) {
+            $quiz_id = (int)$user_answer['quiz'];
+            $answer_id = (int)$user_answer['answer'];
             $quiz = Quiz::find($quiz_id);
             if($quiz->correctAnswer->answer_id == $answer_id){
-                $score++;
+                $raven_score++;
             }
         }
-        return $score;
+       
+        $reference = ReferencesIQ::where('raven_score', $raven_score)->first();
+        $iq_score = 0;
+        if($reference != null){
+            $iq_score = $reference->iq_score;
+        }
+        $estimation = ReferencesIQ::estimateIQ($iq_score);
+        return json_encode([
+                            'rave_score' => $raven_score, 
+                            'time' => $minute . 'm' . $second . 's',
+                            'iq_score' => $iq_score,
+                            'estimation' => $estimation
+                            ], JSON_UNESCAPED_UNICODE); //Không bị lỗi tiếng Việt
+   
         
+    }
+    public function Test(){
+        $reference = ReferencesIQ::where('raven_score', 11)->first();
+        return ReferencesIQ::estimateIQ(130);
+        if($reference != null){
+            return $reference->estimateIQ(102);
+        }
     }
 }
