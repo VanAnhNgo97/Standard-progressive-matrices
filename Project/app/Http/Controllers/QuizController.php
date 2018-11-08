@@ -74,24 +74,33 @@ class QuizController extends Controller
         $second = 60 - (int)$request->second;
         $user_answers = $request->answers; //is_array = true
         $raven_score = 0;
-
-        foreach ($user_answers as $user_answer) {
-            $quiz_id = (int)$user_answer['quiz'];
-            $answer_id = (int)$user_answer['answer'];
-            $quiz = Quiz::find($quiz_id);
-            if($quiz->correctAnswer->answer_id == $answer_id){
-                $raven_score++;
+        if($user_answers != null)
+        {
+            foreach ($user_answers as $user_answer) 
+            {
+                $quiz_id = (int)$user_answer['quiz'];
+                $answer_id = (int)$user_answer['answer'];
+                $quiz = Quiz::find($quiz_id);
+                if($quiz->correctAnswer->answer_id == $answer_id)
+                {
+                    $raven_score++;
+                }
             }
         }
-       
         $reference = ReferencesIQ::where('raven_score', $raven_score)->first();
         $iq_score = 0;
         if($reference != null){
             $iq_score = $reference->iq_score;
         }
         $estimation = ReferencesIQ::estimateIQ($iq_score);
+      /*  return view('result_message', [
+                                        'rave_score' => $raven_score, 
+                                        'time' => $minute . 'm' . $second . 's',
+                                        'iq_score' => $iq_score,
+                                        'estimation' => $estimation
+                                      ])->render();*/
         return json_encode([
-                            'rave_score' => $raven_score, 
+                            'raven_score' => $raven_score, 
                             'time' => $minute . 'm' . $second . 's',
                             'iq_score' => $iq_score,
                             'estimation' => $estimation

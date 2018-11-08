@@ -15,6 +15,17 @@ $(document).ready(function(){
     $("#finish").click(function(){
         submitQuiz();
     });
+    $("#modal_result").iziModal({
+        title: 'Kết quả của bạn',
+        headerColor: '#2e21df',
+        background: null,
+        theme: '',
+        top: null,
+        bottom: null,
+        borderBottom: true,
+        padding: 20,
+
+    });
 
     function getQuiz(url) {
         $.ajax({
@@ -55,6 +66,14 @@ $(document).ready(function(){
           //  dataType: 'JSON',
             success: function(data){
             	console.log(data);
+                var result = JSON.parse(data);
+                $("#time_finish").text(result.time);
+                $("#raven_score").text(result.raven_score);
+                $("#iq_score").text(result.iq_score);
+                $("#estimation").text(result.estimation);
+                $('#modal_result').iziModal('open');
+
+
             },
              error: function(data) {
              	console.log("error");
