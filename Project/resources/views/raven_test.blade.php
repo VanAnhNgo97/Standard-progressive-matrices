@@ -1,15 +1,5 @@
 @extends('layout/_shared')
 @section('content')
-	<!-- Home -->
-
-	
-
-	<!-- Intro -->
-
-
-
-	<!-- Course -->
-
 	<div class="course">
 		<div class="course_top"></div>
 		<div class="container">
@@ -41,6 +31,7 @@
 							<!-- FAQs -->
 							<br>
 							<label>Your age:</label>
+							<p>aa</p>
 							<input type="number" name="age">
 							@if(count($quizzes) > 0)
 							<div class="faqs" id="quiz_container">
@@ -148,13 +139,21 @@
 			</div>
 		</div>
 	</div>
-
+	<div class="iziModal" id="modal_result">
+		<p>Thời gian hoàn thành: <span id="time_finish"></span></p>
+		<p>Số câu trả lời đúng: <span id="raven_score"></span></p>
+		<h6>Chỉ số IQ: <span id="iq_score"></span></h6>
+		<p>Bạn có trí tuệ <span id="estimation"></span></p>
+	</div>
 @endsection
 @section('js_css')
 <link rel="stylesheet" type="text/css" href="{{asset('css/course.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/course_responsive.css')}}">
+<link rel="stylesheet" type="text/css" 
+	  href="{{asset('plugins/iziModal/css/iziModal.css')}}">
 <script src="{{asset('plugins/parallax-js-master/parallax.min.js')}}"></script>
 <script src="{{asset('plugins/progressbar/progressbar.min.js')}}"></script>
+<script src="{{asset('plugins/iziModal/js/iziModal.js')}}"></script>
 <script src="{{asset('js/course.js')}}"></script>
 <script src="{{asset('js/raven_test.js')}}"></script>
 @endsection
