@@ -24,3 +24,9 @@ Route::get('admin/quiz/add', function(){
 Route::post('admin/quiz/add','QuizController@Create');
 Route::post('/raven/submit','QuizController@SubmitQuiz');
 Route::get('test','QuizController@Test');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('raven/login', function(){
+	return view('login');
+});
