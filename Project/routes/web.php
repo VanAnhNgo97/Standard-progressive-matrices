@@ -29,4 +29,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('raven/login', function(){
 	return view('login');
+	});
+Route::get('raven/register',function(){
+	return view('register');
 });
+Route::post('/index','RegisterController@addUser')->name('addUser');
