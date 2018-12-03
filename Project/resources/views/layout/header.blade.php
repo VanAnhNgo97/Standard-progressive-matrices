@@ -59,20 +59,26 @@
 						</div>
 						<nav class="main_nav_contaner">
 							<ul class="main_nav">
-								<li class="active"><a href="index.html">Home</a></li>
-								<li><a href="courses.html">IQ Tests</a></li>
-								<li><a href="instructors.html">IQ Articles</a></li>
-								<li><a href="#">Events</a></li>
+								<li class="active"><a href="index.html">Trang chủ</a></li>
+								<li><a href="courses.html">Kiểm tra IQ</a></li>
+								<li><a href="instructors.html">Bài báo IQ</a></li>
+								<li><a href="#">Sự kiện</a></li>
 								<li><a href="blog.html">Blog</a></li>
-								<li><a href="contact.html">Contact</a></li>
+								<li><a href="contact.html">Liên hệ</a></li>
 							</ul>
 						</nav>
-						<div class="header_content_right ml-auto text-right">
-							@guest
+						@guest
+						<div class="header_content_right ml-auto text-right" style="width:120px">
 							<div class="login_btn trans_200">
-								<a href="#">Login</a>
+								<a href="{{route('raven.login')}}">Đăng nhập</a>
 							</div>
-							@endguest
+						</div>
+						<div class="header_content_right text-right register_container">
+							<div class="login_btn trans_200">
+								<a href="#">Đăng kí</a>
+							</div>
+						</div>
+						@endguest
 						{{--	<div class="header_search">
 								<div class="search_form_container">
 									<form action="#" id="search_form" class="search_form trans_400">
@@ -85,12 +91,30 @@
 							</div> --}}
 
 							<!-- Hamburger -->
-							@auth	
-							<div class="user"><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></div>
-							<div class="hamburger menu_mm">
-								<i class="fa fa-bars menu_mm" aria-hidden="true"></i>
-							</div>
-							@endauth
+						@auth
+						<div class="ml-auto">
+							<b>{{Auth::user()->full_name}}</b>
+						</div>
+						<div class="text-right">
+							<div class="dropdown">
+							    <div class="dropdown-toggle" data-toggle="dropdown">
+							    	<div class="user">	
+							    		<a href="#">
+							    			<i class="fa fa-user" aria-hidden="true"></i>
+							    		</a>
+							    	</div>
+							    	<span class="caret"></span>
+							    </div>
+							    <ul class="dropdown-menu">
+							      <li>
+							      	<a href="{{route('player.result')}}">					 Lịch sử test</a>
+							      </li>
+							      <li><a href="#">Tài khoản</a></li>
+							      <li><a href="/raven/logout">Đăng xuất</a></li>
+							    </ul>
+						 	</div>
+					 	</div>
+						@endauth
 							
 
 						</div>
