@@ -59,23 +59,23 @@
 						</div>
 						<nav class="main_nav_contaner">
 							<ul class="main_nav">
-								<li class="active"><a href="index.html">Home</a></li>
-								<li><a href="courses.html">IQ Tests</a></li>
-								<li><a href="instructors.html">IQ Articles</a></li>
-								<li><a href="#">Events</a></li>
+								<li class="active"><a href="index.html">Trang chủ</a></li>
+								<li><a href="courses.html">Kiểm tra IQ</a></li>
+								<li><a href="instructors.html">Bài báo IQ</a></li>
+								<li><a href="#">Sự kiện</a></li>
 								<li><a href="blog.html">Blog</a></li>
-								<li><a href="contact.html">Contact</a></li>
+								<li><a href="contact.html">Liên hệ</a></li>
 							</ul>
 						</nav>
 						@guest
-						<div class="header_content_right ml-auto text-right">
+						<div class="header_content_right ml-auto text-right" style="width:120px">
 							<div class="login_btn trans_200">
-								<a href="{{route('raven.login')}}">Login</a>
+								<a href="{{route('raven.login')}}">Đăng nhập</a>
 							</div>
 						</div>
 						<div class="header_content_right text-right register_container">
 							<div class="login_btn trans_200">
-								<a href="#">Register</a>
+								<a href="#">Đăng kí</a>
 							</div>
 						</div>
 						@endguest
