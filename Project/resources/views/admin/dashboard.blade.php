@@ -15,8 +15,8 @@
     <link href="{{asset('css/admin_dashboard/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Custom fonts for this template-->
-    <link href="{{asset('css/admin_dashboard/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('css/admin_dashboard/all.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/admin_dashboard/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+
     <!-- Page level plugin CSS-->
     <link href="{{asset('css/admin_dashboard/dataTables.bootstrap4.css')}}" rel="stylesheet">
 
