@@ -67,8 +67,9 @@ $(document).ready(function(){
             success: function(data){
             	console.log(data);
                 var result = JSON.parse(data);
-                $("#time_finish").text(result.time);
-                $("#raven_score").text(result.raven_score);
+                console.log(result);
+                $("#time_finish").text(result.minute + "phút " + result.second + " giây");
+                $("#raven_score").text(result.correct_answers);
                 $("#iq_score").text(result.iq_score);
                 $("#estimation").text(result.estimation);
                 $('#modal_result').iziModal('open');

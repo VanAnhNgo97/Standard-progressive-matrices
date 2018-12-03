@@ -8,5 +8,8 @@ class Result extends Model
 {
     //
     protected $table='results';
-    
+    public function player()
+    {
+    	return $this->belongsTo('App\User','user_id','id');
+    }
 }

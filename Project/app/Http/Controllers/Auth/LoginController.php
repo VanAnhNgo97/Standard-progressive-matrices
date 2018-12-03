@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use App\User;
+use Session;
+use Validator;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +31,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -39,5 +45,31 @@ class LoginController extends Controller
     public function username()
     {
         return 'username';
+    }
+   /* public function showLoginForm()
+    {
+        return view('login');
+    }*/
+
+    public function loginApp(Request $request)
+    {
+        $data = [
+            'username' => $request->username,
+            'password' => $request->password
+        ];
+
+        if(Auth::attempt($data))
+        {
+            $user = Auth::user();
+            if($user->permission == 'admin')
+            {
+                return redirect()->route('admin.result.index');
+            }
+            else
+            {
+                return redirect()->route('raven.home');
+            }
+        }
+        return back()->withErrors(['message' => 'Đăng nhập không thành công']);
     }
 }
