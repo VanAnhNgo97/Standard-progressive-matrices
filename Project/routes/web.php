@@ -43,6 +43,11 @@ Route::prefix('raven')->group(function(){
 		return view('login');
 	});
 	Route::post('login', 'Auth\LoginController@loginApp')->name('raven.login');
+	Route::get('register',function(){
+		return view('register');
+	});
+	Route::post('/register','RegisterController@addUser')->name('addUser');
+
 });
 //Route for logout
 Route::middleware(['auth'])->group(function(){
@@ -51,40 +56,7 @@ Route::middleware(['auth'])->group(function(){
 	    Request::session()->flush();
 	    return redirect()->route('raven.home');
 	});
-});
-//
-/*Route::get('/raven','QuizController@GetQuizzes')
-	->middleware('auth','check.permission:player');
-Route::get('admin/quiz/add', function(){
-	return view('admin/quiz_add');
-})->name('AddQuiz');
-Route::post('admin/quiz/add','QuizController@Create');
-Route::post('/raven/submit','QuizController@SubmitQuiz');
-Route::get('test','QuizController@Test');
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/raven/login', function(){
-	return view('login');
 });
-Route::post('/raven/login', 'Auth\LoginController@loginApp')->name('raven.login');
-Route::get('/raven/logout', function(){
-	Auth::logout();
-    Request::session()->flush();
-    return redirect()->route('raven.home');
-});
-Route::get('/raven/player/result','PlayerController@GetResult')
-	->name('player.result')
-	->middleware('auth','check.permission:player');
-Route::get('/admin/raven/result', 'ResultController@GetAllResult')
-	->name('admin.result.index')
-	->middleware('auth','check.permission:admin');
-Route::get('/admin/raven/result/player/{id}', 'ResultController@GetPlayerResult')
-	->name('admin.result.player')
-	->middleware('auth','check.permission:admin');
-	});*/
-Route::get('raven/register',function(){
-	return view('register');
-});
-Route::post('/index','RegisterController@addUser')->name('addUser');
+
 

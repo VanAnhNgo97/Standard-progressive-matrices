@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -26,7 +26,9 @@ class RegisterController extends Controller
         $user->username = $req->user_name;
         $user->email = $req->email;
         $user->birthday = $req->birthday;
+        $user->permission = 'player';
         $user->save();
-        return redirect('index');
+        Auth::guard()->login($user);
+        return redirect()->route('raven.home');
     }
 }
