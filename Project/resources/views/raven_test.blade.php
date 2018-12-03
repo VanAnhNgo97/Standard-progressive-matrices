@@ -16,7 +16,7 @@
 								<div class="row">
 									<div class="col-lg-9">
 										<div class="tabs d-flex flex-row align-items-center justify-content-start">
-											<div class="tab active">START</div>
+											<div class="tab active">Bắt đầu</div>
 											<div class="tab"></div>
 											<div class="tab"></div>
 											<div class="tab"></div>
@@ -30,9 +30,6 @@
 						<div class="tab_panel description active">
 							<!-- FAQs -->
 							<br>
-							<label>Your age:</label>
-							<p>aa</p>
-							<input type="number" name="age">
 							@if(count($quizzes) > 0)
 							<div class="faqs" id="quiz_container">
 								@include('quiz_container')
@@ -60,19 +57,19 @@
 
 							<!-- Features -->
 							<div class="sidebar_section features">
-								<div class="sidebar_title">Test Features</div>
+								<div class="sidebar_title">Yêu cầu</div>
 								<div class="features_content">
 									<ul class="features_list">
 
 										<!-- Feature -->
 										<li class="d-flex flex-row align-items-start justify-content-start">
-											<div class="feature_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Duration</span></div>
-											<div class="feature_text ml-auto">60 minutes</div>
+											<div class="feature_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Thời gian</span></div>
+											<div class="feature_text ml-auto">60 phút</div>
 										</li>
 
 										<!-- Feature -->
 										<li class="d-flex flex-row align-items-start justify-content-start">
-											<div class="feature_title"><i class="fa fa-bell" aria-hidden="true"></i><span>Quizzes</span></div>
+											<div class="feature_title"><i class="fa fa-bell" aria-hidden="true"></i><span>Số lượng câu hỏi</span></div>
 											<div class="feature_text ml-auto">60</div>
 										</li>
 										<!-- Feature -->
@@ -85,51 +82,20 @@
 							</div>
 							<!-- You may like -->
 							<div class="sidebar_section like">
-								<div class="sidebar_title">Time</div>
+								<div class="sidebar_title">Thời gian</div>
 								<div class="like_items">
 									<div class="countdown_container">
 										<ul class="timer_list">
-											<li><div id="minute" class="timer_num">00</div><div class="timer_ss">minutes</div></li>
-											<li><div id="second" class="timer_num">00</div><div class="timer_ss">seconds</div></li>
+											<li><div id="minute" class="timer_num">00</div><div class="timer_ss">Phút</div></li>
+											<li><div id="second" class="timer_num">00</div><div class="timer_ss">Giây</div></li>
 										</ul>
 									</div>
 									<div class="text-center login_btn trans_200">
 										<a  href="javascript:void(0)" 
-											id="finish">Finish
+											id="finish">Hoàn thành
 										</a>
 									</div>
 									<!-- Like Item -->
-							{{--		<div class="like_item d-flex flex-row align-items-end justify-content-start">
-										<div class="like_title_container">
-											<div class="like_title">Vocabulary</div>
-											<div class="like_subtitle">Spanish</div>
-										</div>
-										<div class="like_price ml-auto">Free</div>
-									</div>
-									<!-- Like Item -->
-									<div class="like_item d-flex flex-row align-items-end justify-content-start">
-										<div class="like_title_container">
-											<div class="like_title">Vocabulary</div>
-											<div class="like_subtitle">Spanish</div>
-										</div>
-										<div class="like_price ml-auto">Free</div>
-									</div>
-									<!-- Like Item -->
-									<div class="like_item d-flex flex-row align-items-end justify-content-start">
-										<div class="like_title_container">
-											<div class="like_title">Vocabulary</div>
-											<div class="like_subtitle">Spanish</div>
-										</div>
-										<div class="like_price ml-auto">Free</div>
-									</div>
-									<!-- Like Item -->
-									<div class="like_item d-flex flex-row align-items-end justify-content-start">
-										<div class="like_title_container">
-											<div class="like_title">Vocabulary</div>
-											<div class="like_subtitle">Spanish</div>
-										</div>
-										<div class="like_price ml-auto">Free</div>
-									</div> --}}
 								</div>
 							</div>
 						</div>
