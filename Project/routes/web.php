@@ -59,4 +59,7 @@ Route::middleware(['auth'])->group(function(){
 
 });
 
+Route::get('admin/dashboard', function(){
+	return view('admin/dashboard');
+});
 
