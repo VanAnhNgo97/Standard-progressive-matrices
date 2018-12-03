@@ -26,7 +26,8 @@ class RegisterController extends Controller
         $user->username = $req->user_name;
         $user->email = $req->email;
         $user->birthday = $req->birthday;
+        $user->permission = 'player';
         $user->save();
-        return redirect('index');
+        return redirect()->route('raven.home');
     }
 }
