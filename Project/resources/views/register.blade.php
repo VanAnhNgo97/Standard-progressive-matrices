@@ -27,9 +27,9 @@
                 	@endforeach
             	@endif
             	@if (session('thongbao'))
-                	<div class="alert alert-success">
-                    	{{ session('thongbao') }}
-                	</div>
+                	<script type="text/javascript">
+                		
+                	</script>
             	@endif
 				<form action="{{ route('addUser') }}" method="POST">
 					<h3>Đăng kí thành viên</h3>

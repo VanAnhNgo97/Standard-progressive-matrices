@@ -34,3 +34,6 @@ Route::get('raven/register',function(){
 	return view('register');
 });
 Route::post('/index','RegisterController@addUser')->name('addUser');
+Route::get('admin/dashboard', function(){
+	return view('admin/dashboard');
+});
