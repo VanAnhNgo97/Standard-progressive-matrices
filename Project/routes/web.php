@@ -81,4 +81,10 @@ Route::get('/admin/raven/result', 'ResultController@GetAllResult')
 	->middleware('auth','check.permission:admin');
 Route::get('/admin/raven/result/player/{id}', 'ResultController@GetPlayerResult')
 	->name('admin.result.player')
-	->middleware('auth','check.permission:admin');*/
+	->middleware('auth','check.permission:admin');
+	});*/
+Route::get('raven/register',function(){
+	return view('register');
+});
+Route::post('/index','RegisterController@addUser')->name('addUser');
+
