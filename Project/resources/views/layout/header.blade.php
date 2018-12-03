@@ -67,12 +67,18 @@
 								<li><a href="contact.html">Contact</a></li>
 							</ul>
 						</nav>
+						@guest
 						<div class="header_content_right ml-auto text-right">
-							@guest
 							<div class="login_btn trans_200">
-								<a href="#">Login</a>
+								<a href="{{route('raven.login')}}">Login</a>
 							</div>
-							@endguest
+						</div>
+						<div class="header_content_right text-right register_container">
+							<div class="login_btn trans_200">
+								<a href="#">Register</a>
+							</div>
+						</div>
+						@endguest
 						{{--	<div class="header_search">
 								<div class="search_form_container">
 									<form action="#" id="search_form" class="search_form trans_400">
@@ -85,12 +91,30 @@
 							</div> --}}
 
 							<!-- Hamburger -->
-							@auth	
-							<div class="user"><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></div>
-							<div class="hamburger menu_mm">
-								<i class="fa fa-bars menu_mm" aria-hidden="true"></i>
-							</div>
-							@endauth
+						@auth
+						<div class="ml-auto">
+							<b>{{Auth::user()->full_name}}</b>
+						</div>
+						<div class="text-right">
+							<div class="dropdown">
+							    <div class="dropdown-toggle" data-toggle="dropdown">
+							    	<div class="user">	
+							    		<a href="#">
+							    			<i class="fa fa-user" aria-hidden="true"></i>
+							    		</a>
+							    	</div>
+							    	<span class="caret"></span>
+							    </div>
+							    <ul class="dropdown-menu">
+							      <li>
+							      	<a href="{{route('player.result')}}">					 Lịch sử test</a>
+							      </li>
+							      <li><a href="#">Tài khoản</a></li>
+							      <li><a href="/raven/logout">Đăng xuất</a></li>
+							    </ul>
+						 	</div>
+					 	</div>
+						@endauth
 							
 
 						</div>

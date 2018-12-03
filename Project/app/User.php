@@ -31,4 +31,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Model\Result','user_id','id');
     }
+    public function hasPermission($permission)
+    {
+        return ($this->permission == $permission);
+    }
 }

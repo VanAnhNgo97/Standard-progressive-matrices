@@ -24,7 +24,9 @@
 					</span>
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" 
+							method="POST" action="{{ route('raven.login') }}">
+					@csrf
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Vui lòng điền nhập tài khoản">
 						<span class="label-input100">Tài khoản</span>
 						<input class="input100" type="text" name="username" placeholder="Tên đăng nhập">
@@ -33,7 +35,7 @@
 
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "Vui lòng nhập mật khẩu">
 						<span class="label-input100">Mật khẩu</span>
-						<input class="input100" type="password" name="pass" placeholder="Mật khẩu">
+						<input class="input100" type="password" name="password" placeholder="Mật khẩu">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -53,17 +55,27 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" type="submit">
 							Đăng nhập
 						</button>
 					</div>
+					@if ($errors->any())
+				    <div class="alert alert-danger">
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li>{{ $error }}</li>
+				            @endforeach
+				        </ul>
+				    </div>
+				@endif
 				</form>
+
 			</div>
 		</div>
 	</div>
 <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
 <script src="{{asset('css/bootstrap4/popper.js')}}"></script>
 <script src="{{asset('css/bootstrap4/bootstrap.min.js')}}"></script>
-<script src="{{asset('js/login.js')}}"></script>
+<!-- <script src="{{asset('js/login.js')}}"></script> -->
 </body>
 </html>
