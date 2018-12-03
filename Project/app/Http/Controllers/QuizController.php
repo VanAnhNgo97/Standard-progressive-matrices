@@ -8,6 +8,9 @@ use App\Model\Quiz;
 use App\Model\Answer;
 use App\Model\CorrectAnswer;
 use App\Model\ReferencesIQ;
+use App\Model\Result;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 class QuizController extends Controller
 {
     //
@@ -70,10 +73,11 @@ class QuizController extends Controller
     }
     public function SubmitQuiz(Request $request)
     {
-        $minute = 60 - (int)$request->minute;
-        $second = 60 - (int)$request->second;
+       /* $minute = 60 - (int)$request->minute;
+        $second = 60 - (int)$request->second;*/
         $user_answers = $request->answers; //is_array = true
-        $raven_score = 0;
+        $result = new Result;
+        $result->correct_answers = 0;
         if($user_answers != null)
         {
             foreach ($user_answers as $user_answer) 
@@ -83,28 +87,23 @@ class QuizController extends Controller
                 $quiz = Quiz::find($quiz_id);
                 if($quiz->correctAnswer->answer_id == $answer_id)
                 {
-                    $raven_score++;
+                    $result->correct_answers++;
                 }
             }
         }
-        $reference = ReferencesIQ::where('raven_score', $raven_score)->first();
-        $iq_score = 0;
+
+        $reference = ReferencesIQ::where('raven_score', $result->correct_answers)->first();
+        $result->iq_score = 0;
         if($reference != null){
-            $iq_score = $reference->iq_score;
+            $result->iq_score = $reference->iq_score;
         }
-        $estimation = ReferencesIQ::estimateIQ($iq_score);
-      /*  return view('result_message', [
-                                        'rave_score' => $raven_score, 
-                                        'time' => $minute . 'm' . $second . 's',
-                                        'iq_score' => $iq_score,
-                                        'estimation' => $estimation
-                                      ])->render();*/
-        return json_encode([
-                            'raven_score' => $raven_score, 
-                            'time' => $minute . 'm' . $second . 's',
-                            'iq_score' => $iq_score,
-                            'estimation' => $estimation
-                            ], JSON_UNESCAPED_UNICODE); //Không bị lỗi tiếng Việt
+        $result->estimation = ReferencesIQ::estimateIQ($result->iq_score);
+        //insert result
+        $result->user_id = Auth::id();
+        $result->minute = 60 - (int)$request->minute;
+        $result->second = 60 - (int)$request->second;
+        $result->save();
+        return json_encode($result, JSON_UNESCAPED_UNICODE); //Không bị lỗi tiếng Việt
    
         
     }

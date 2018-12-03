@@ -77,7 +77,7 @@
 			</div>
 		</div>
 		
-	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+	</body>
 	<script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
 	<script>
 	$(document).ready(function (){
