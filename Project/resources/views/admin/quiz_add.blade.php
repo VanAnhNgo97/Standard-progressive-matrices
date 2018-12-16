@@ -1,25 +1,14 @@
 @extends('layout/_shared')
 @section('content')
 	<!-- Home -->
-
-	
-
-	<!-- Intro -->
-
-
-
 	<!-- Course -->
-
 	<div class="course">
 		<div class="course_top"></div>
 		<div class="container">
 			<div class="row row-lg-eq-height">
-
 				<!-- Panels -->
 				<div class="col-lg-9">
-					
 					<div class="tab_panels">
-
 						<!-- Tabs -->
 						<div class="course_tabs_container">
 							<div class="container">
@@ -63,7 +52,6 @@
 			</div>
 		</div>
 	</div>
-
 @endsection
 @section('js_css')
 <link rel="stylesheet" type="text/css" href="{{asset('css/course.css')}}">
