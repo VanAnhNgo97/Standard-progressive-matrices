@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
@@ -22,7 +23,7 @@ class RegisterController extends Controller
 
         $user = new User();
         $user->full_name=$req->first_name." ".$req->last_name;
-        $user->password = hash('md5', $req->password);
+        $user->password = Hash::make($req->password);
         $user->username = $req->user_name;
         $user->email = $req->email;
         $user->birthday = $req->birthday;
