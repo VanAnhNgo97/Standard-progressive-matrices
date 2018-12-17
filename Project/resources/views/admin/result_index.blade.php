@@ -11,7 +11,10 @@
 
 				<!-- Course -->
 			<div class="card mb-3">
-            <div class="card-header">Result</div>
+            <div class="card-header"><b>Result</b>
+            	<a href ="{{ route('export') }}" class="btn btn-info export" id="export-button"> Export file Excel </a>
+            </div>
+
 	                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 	                  <thead>
 	                    <tr>

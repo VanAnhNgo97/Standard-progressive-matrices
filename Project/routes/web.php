@@ -63,3 +63,4 @@ Route::get('admin/dashboard', function(){
 	return view('admin/dashboard');
 });
 
+Route::get('export', 'ExportController@export')->name('export');
