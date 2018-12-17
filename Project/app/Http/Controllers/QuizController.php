@@ -63,7 +63,7 @@ class QuizController extends Controller
     }
     public function GetQuizzes(Request $request)
     {
-        $quizzes = Quiz::orderBy('raven_code', 'asc')->simplePaginate(1);
+        $quizzes = Quiz::simplePaginate(1);
         if ($request->ajax()) {
             //render partial 
             return view('quiz_container', ['quizzes' => $quizzes])->render();  
@@ -113,5 +113,15 @@ class QuizController extends Controller
         if($reference != null){
             return $reference->estimateIQ(102);
         }
+    }
+    public function GetQuizzesByCate(){
+        $quizzes = Quiz::All()->groupBy('category')->toArray();
+        return view('admin/quiz_index', ['quizzes' => $quizzes]);
+    //    return ($quizzes["A"][1]["id"]);
+    }
+    public function GetQuizDetail(Request $request){
+        $id = $request->id;
+        $quizzes = Quiz::simplePaginate(1);
+        return view('admin/quiz_detail', ['quizzes' => $quizzes]);
     }
 }

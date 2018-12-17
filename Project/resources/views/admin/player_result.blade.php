@@ -1,4 +1,4 @@
-@extends('layout/_shared')
+@extends('layout/_admin')
 @section('content')
 	<div class="course_container courses">
 		<div class="courses_background"></div>

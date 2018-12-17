@@ -63,7 +63,7 @@ class LoginController extends Controller
             $user = Auth::user();
             if($user->permission == 'admin')
             {
-                return redirect()->route('admin.result.index');
+                return redirect()->route('admin.quiz.index');
             }
             else
             {
