@@ -25,6 +25,10 @@ Route::middleware(['auth','check.permission:admin'])->group(function(){
 			->name('admin.result.index');
 		Route::get('/result/player/{id}', 'ResultController@GetPlayerResult')
 			->name('admin.result.player');
+		Route::get('quiz', 'QuizController@GetQuizzesByCate')
+			->name('admin.quiz.index');
+		Route::get('quiz/detail', 'QuizController@GetQuizDetail')
+			->name('admin.quiz.detail');
 	});
 
 });
@@ -46,7 +50,7 @@ Route::prefix('raven')->group(function(){
 	Route::get('register',function(){
 		return view('register');
 	});
-	Route::post('/register','RegisterController@addUser')->name('addUser');
+	Route::post('/register','RegisterController@addUser')->name('raven.register');
 
 });
 //Route for logout
